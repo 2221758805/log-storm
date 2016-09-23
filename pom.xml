@@ -30,16 +30,16 @@
 	</repositories>
 
 	<dependencies>
-	<!-- slf4j -->
+		<!-- slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>log4j</groupId>
-		  <artifactId>log4j</artifactId>
-		  <version>1.2.17</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 		<!-- logback -->
 		<dependency>
@@ -69,6 +69,11 @@
 			<version>1.0.2</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-elasticsearch</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka_2.10</artifactId>
 			<version>0.8.2.1</version>
@@ -83,18 +88,28 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 	</dependencies>
-	
-	<build>  
-    <plugins>  
-      <plugin>  
-        <groupId>org.apache.maven.plugins</groupId>  
-        <artifactId>maven-compiler-plugin</artifactId>  
-        <configuration>  
-          <source>1.7</source>  
-          <target>1.7</target>  
-        </configuration>  
-      </plugin>  
-    </plugins>  
-</build>  
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
