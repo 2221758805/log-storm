@@ -30,7 +30,7 @@ public class FullLogTopology {
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout("spout", kafkaSpout, 4);
 		builder.setBolt("fulllog", new FullLogBolt(), 10).shuffleGrouping("spout");
-		builder.setBolt("printlog", new PrintBolt(), 4).shuffleGrouping("fulllog");
+//		builder.setBolt("printlog", new PrintBolt(), 4).shuffleGrouping("fulllog");
 		builder.setBolt("esbolt", esIndexBolt, 4).shuffleGrouping("fulllog");
 
 		Config conf = new Config();
@@ -51,7 +51,9 @@ public class FullLogTopology {
 	private static EsIndexBolt createESBolt() {
 		Map<String, String> additionalParameters = new HashMap<>();
 		additionalParameters.put("client.transport.sniff", "true");
-		EsConfig esConfig = new EsConfig("LOG-CLUETER", new String[] { "192.168.156.60:9300" }, additionalParameters);
+		additionalParameters.put("node.name", "storm-es-client");
+		additionalParameters.put("transport.netty.connect_timeout", "10000ms");
+		EsConfig esConfig = new EsConfig("LOG-CLUSTER", new String[] { "192.168.156.60:9300" }, additionalParameters);
 		EsTupleMapper tupleMapper = new FullLogESTupleMapper();
 		EsIndexBolt indexBolt = new EsIndexBolt(esConfig, tupleMapper);
 		return indexBolt;
